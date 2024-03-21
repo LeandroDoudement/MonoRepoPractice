@@ -2,22 +2,18 @@ import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
-import Image from 'next/image';
 
 interface MainFeaturedPostProps {
   post: {
-    description: string;
-    image: string;
-    imageText: string;
-    linkText: string;
     title: string;
+    body: string;
   };
 }
 
 export default function MainFeaturedPost(props: MainFeaturedPostProps) {
   const { post } = props;
+  if (!post) return null;
 
   return (
     <Paper
@@ -29,16 +25,8 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundImage: `url(${post.image})`,
       }}
     >
-      <Image
-        src={post.image}
-        alt={post.imageText}
-        layout='fill'
-        objectFit='cover'
-        quality={100}
-      />
       <Box
         sx={{
           position: 'absolute',
@@ -67,11 +55,8 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
               {post.title}
             </Typography>
             <Typography variant='h5' color='inherit' paragraph>
-              {post.description}
+              {post.body}
             </Typography>
-            <Link variant='subtitle1' href='#'>
-              {post.linkText}
-            </Link>
           </Box>
         </Grid>
       </Grid>
